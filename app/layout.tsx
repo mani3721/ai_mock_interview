@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
   description: "An AI-powered platform for preparing for mock interviews",
   verification: {
-    google: '92IRsE2WxZ0yQv2saDjd2_-B943JlcF5HW6XqTz4YsM',
+    google: 'Fr2Qlgbnonn6z9NxP0yAqyvn2RNmrLRdgzRcAm6aqLs',
   },
   twitter: {
     card: 'summary_large_image'
