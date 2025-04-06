@@ -94,34 +94,31 @@ export async function setSessionCookie(idToken: string) {
 }
 
 export async function getCurrentUser():Promise<User | null> {
-    const cookieStore = await cookies();
+  const cookieStore = await cookies();
 
-    const sectionCookie = cookieStore.get("session")?.value;
+  const sessionCookie = cookieStore.get("session")?.value;
+  if (!sessionCookie) return null;
 
-    if (!sectionCookie) return null;
+  try {
+    const decodedClaims = await auth.verifySessionCookie(sessionCookie, true);
 
-    try {
+    // get user info from db
+    const userRecord = await db
+      .collection("users")
+      .doc(decodedClaims.uid)
+      .get();
+    if (!userRecord.exists) return null;
 
-        const decodedClaims = await auth.verifySessionCookie(sectionCookie, true);
+    return {
+      ...userRecord.data(),
+      id: userRecord.id,
+    } as User;
+  } catch (error) {
+    console.log(error);
 
-        const userRecord = await db
-        .collection("users")
-        .doc(decodedClaims.uid)
-        .get();
-
-        if (!userRecord.exists) return null;
-
-        return {
-            ...userRecord.data(),
-            id: userRecord.id,
-          } as User;
-          
-    } catch (e) {
-
-        console.log();
-        return null;
-        
-    }
+    // Invalid or expired session
+    return null;
+  }
     
 }
 
@@ -129,4 +126,5 @@ export async function getCurrentUser():Promise<User | null> {
 export async function isAuthenticated() {
     const user = await getCurrentUser();
     return !!user; 
-  }
+}
+

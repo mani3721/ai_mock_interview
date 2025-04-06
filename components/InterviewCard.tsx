@@ -7,14 +7,14 @@ import Link from "next/link";
 import DsiplayTechIcons from "./DisplayTechIcons";
 
 
-const InterviewCard = ({interviewId,
+const InterviewCard = ({id,
     userId,
     role,
     type,
     techstack,
     createdAt}: InterviewCardProps) => { 
 
-        const feedback = null as FeedBack| null
+        const feedback = null as Feedback| null
 
         const normalizedType = /mix/gi.test(type) ? "Mixed" : type;
 
@@ -65,7 +65,7 @@ const InterviewCard = ({interviewId,
                     <DsiplayTechIcons techStack={techstack}/>
 
                     <Button className="btn-primary">
-                            <Link href={feedback ? '/interview/${interview}/feedback' : '/interview/${interviewId}'}>
+                            <Link href={feedback ? `/interview/${id}/feedback` : '/interview/${interviewId}'}>
                                 {feedback ? 'Check Feedback' : 'View Interview'}
                             </Link>
                     </Button>
