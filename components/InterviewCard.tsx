@@ -65,9 +65,9 @@ const InterviewCard = ({id,
                     <DsiplayTechIcons techStack={techstack}/>
 
                     <Button className="btn-primary">
-                            <Link href={feedback ? `/interview/${id}/feedback` : '/interview/${interviewId}'}>
-                                {feedback ? 'Check Feedback' : 'View Interview'}
-                            </Link>
+                    <Link href={ feedback ? `/interview/${id}/feedback` : `/interview/${id}`}>
+              {feedback ? "Check Feedback" : "View Interview"}
+            </Link>
                     </Button>
 
                 </div>

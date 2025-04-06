@@ -72,9 +72,7 @@ export async function getInterviewById(id: string): Promise<Interview | null> {
   return interview.data() as Interview | null;
 }
 
-export async function getFeedbackByInterviewId(
-  params: GetFeedbackByInterviewIdParams
-): Promise<Feedback | null> {
+export async function getFeedbackByInterviewId(params: GetFeedbackByInterviewIdParams): Promise<Feedback | null> {
   const { interviewId, userId } = params;
 
   const querySnapshot = await db
@@ -90,9 +88,7 @@ export async function getFeedbackByInterviewId(
   return { id: feedbackDoc.id, ...feedbackDoc.data() } as Feedback;
 }
 
-export async function getLatestInterviews(
-  params: GetLatestInterviewsParams
-): Promise<Interview[] | null> {
+export async function getLatestInterviews(params: GetLatestInterviewsParams): Promise<Interview[] | null> {
   const { userId, limit = 20 } = params;
 
   const interviews = await db
